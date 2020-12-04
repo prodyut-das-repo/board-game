@@ -1,0 +1,39 @@
+<!-- Dropdown for changing the grid size -->
+<div class="hList">
+    <a class="menu">
+        <h2 class="menu-title">Change the board size</h2>
+        <ul class="menu-dropdown">
+            <li (click)="selectGridSize(3)">Easy: 3x3</li>
+            <li (click)="selectGridSize(4)">Medium: 4x4</li>
+            <li (click)="selectGridSize(6)">Hard: 6x6</li>
+        </ul>
+    </a>
+</div>
+<!-- Grid body -->
+<div class="bg-text">
+    <div class="flex">
+        <div>
+            <button type="button" class="restart-button" (click)="restartGame()">Restart</button>
+        </div>
+        <div>
+            <h5>Score: {{score}}</h5>
+            <h5>Highest: {{highestScore}}</h5>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div class="grid-row" *ngFor="let col of rowArray; index as i">
+                <div class="grid-column" *ngFor="let col of colArray; index as j" (click)="onGridClick($event)"></div>
+            </div>
+        </div>
+    </div>
+    <div class="flex">
+        <div>
+            <button type="button" class="restart-button" (click)="resetGame()">End Game</button>
+        </div>
+        <div>
+            <h5>Time spent: {{intervalCount}}</h5>
+            <h5>Time remaining: {{120 - intervalCount}}</h5>
+        </div>
+    </div>
+</div>
