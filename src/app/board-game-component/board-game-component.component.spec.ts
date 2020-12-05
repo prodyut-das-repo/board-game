@@ -47,6 +47,13 @@ describe('ListOfPaymentsItemComponent', () => {
       expect(component.restartGame).toHaveBeenCalled();
     });
   });
+  it('makes call to resetGameAfterTimeOver ', () => {
+    spyOn(component, 'resetGameAfterTimeOver').and.callThrough();
+    fixture.whenStable().then(() => {
+      component.resetGameAfterTimeOver();
+      expect(component.resetGameAfterTimeOver).toHaveBeenCalled();
+    });
+  });
   it('makes call to onGridClick ', () => {
     spyOn(component, 'onGridClick').and.callThrough();
     fixture.whenStable().then(() => {

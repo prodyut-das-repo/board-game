@@ -92,13 +92,32 @@ export class BoardGameComponentComponent implements OnInit {
       //applying class to random generated index
       document.getElementsByClassName("grid-column")[gridIndex].classList.add("selected-index");
       if (this.intervalCount++ > 119) {
-        this.resetGame();
+        this.resetGameAfterTimeOver();
       }
     }, 1000);
   }
 
   /**
-   * Restarts game
+   * Resets game after time over
+   */
+  resetGameAfterTimeOver() {
+    clearInterval(this.timer);
+    Swal.fire({
+      title: 'Game Over!!!',
+      text: `Click Okay to play again`,
+      icon: 'info',
+      showCancelButton: false,
+      confirmButtonText: `Okay`,
+    }).then((result) => {
+      if (result.value) {
+        //triggered after reading rules
+        this.restartGame()
+      }
+    });
+  }
+
+  /**
+   * Resets game
    */
   resetGame() {
     this.score = 0;
@@ -111,7 +130,7 @@ export class BoardGameComponentComponent implements OnInit {
       showConfirmButton: false,
       icon: 'info',
       timer: 3000,
-      title: 'Game stopped / Time up! Play again!'
+      title: 'Game stopped! Play again!'
     })
   }
 
