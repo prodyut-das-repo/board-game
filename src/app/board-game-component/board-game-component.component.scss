@@ -14,6 +14,17 @@
     background: linear-gradient(to bottom right, #c90a6d, #ff48a0);
 }
 
+.restart-button:hover {
+    background: linear-gradient(to bottom right, #0c636e, #5977c9);
+}
+
+h1 {
+    font-family: lato, sans-serif;
+    font-weight: 300;
+    letter-spacing: -7px;
+    font-size: 48px;
+}
+
 .flex {
     display: flex;
     justify-content: space-between;
@@ -50,7 +61,7 @@
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .bg-text {
-        box-shadow: 5px 4px 8px #000;
+        box-shadow: 6px 7px 12px #000;
         background-color: rgba(0, 0, 0, 0.4);
         color: white;
         font-weight: bold;
@@ -70,8 +81,33 @@
         height: 33px;
         width: 33px;
     }
-    h5{
+    h5 {
         font-size: 0.75rem;
+    }
+    h1{
+        font-family: lato, sans-serif;
+        font-weight: 300;
+        letter-spacing: -3px;
+        font-size: 18px;
+    }
+    .restart-button {
+        color: #fff;
+        width: 74px;
+        height: 28px;
+        outline: 0;
+        font-size: 12px;
+        border: none;
+        display: block;
+        cursor: pointer;
+        font-weight: 300;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 70px;
+        box-shadow: 0 13px 26px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.16);
+        background: linear-gradient(to bottom right, #c90a6d, #ff48a0);
+    }
+    .restart-button:hover {
+        background: linear-gradient(to bottom right, #0c636e, #5977c9);
     }
 }
 
@@ -95,19 +131,20 @@ a {
     display: block;
     padding: 12px 20px 11px;
     font-size: 20px;
-    background: #9dc852;
+    background: #0c7e79;
     text-align: center;
     color: #ffffff;
+    border-radius: 10px;
     font-weight: bold;
-    text-transform: uppercase;
     transition: 0.3s background-color;
+    box-shadow: 6px 7px 12px #000;
 }
 
 .menu-title:before {
     content: "";
     display: block;
     height: 0;
-    border-top: 5px solid #9dc852;
+    border-top: 5px solid #748f46;
     border-left: 75px solid transparent;
     border-right: 75px solid transparent;
     border-bottom: 0 solid #dddddd;
@@ -120,6 +157,7 @@ a {
 
 .menu-title:hover {
     background: #8db842;
+    box-shadow: 6px 7px 12px rgb(138, 10, 177);
 }
 
 .menu-title:hover:before {
@@ -180,22 +218,6 @@ a {
 
 .menu-title_3rd:hover:before {
     border-top-color: #b96666;
-}
-
-.menu-title_4th {
-    background: #dbab58;
-}
-
-.menu-title_4th:hover {
-    background: #cb9b48;
-}
-
-.menu-title_4th:before {
-    border-top-color: #dbab58;
-}
-
-.menu-title_4th:hover:before {
-    border-top-color: #cb9b48;
 }
 
 .menu-dropdown {

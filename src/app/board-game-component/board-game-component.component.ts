@@ -16,6 +16,7 @@ export class BoardGameComponentComponent implements OnInit {
   rowArray: any[];
   intervalCount = 0;
   timer: any;
+  defaultSize = 3;
 
   /**
    * Creates an instance of board game component component.
@@ -27,22 +28,22 @@ export class BoardGameComponentComponent implements OnInit {
    * on init
    */
   ngOnInit() {
+    //welcome rule pop up
     Swal.fire({
       title: 'Rules of The Board Game',
-      text: `On game start, in every 1 second, a randm cell is highlighted in green for 1 second. If you click the highlighted cell then score will be incremented by 1.
-             If you click any unhighlighted cell then score will be decremented by 1.
+      text: `On game starts, in every 1 second, a random block is highlighted in green for 1 second. If you click the highlighted cell then score will be incremented by 1.
+             If you click any unhighlighted block then score will be decremented by 1.
              If the score goes beyond high score then high score will be updated. You will have 120 seconds in each game.`,
       icon: 'info',
       showCancelButton: false,
-      confirmButtonText: `Okay! let's start with 3x3, Easy one`,
+      confirmButtonText: `Okay! let's start with 3x3, Easy one!`,
     }).then((result) => {
       if (result.value) {
-        this.selectGridSize(3);
+        //triggered after reading rules
+        this.selectGridSize(this.defaultSize); // default size is 3
         this.highestScore = Number(localStorage.getItem('highestScore'));
       }
-    })
-    // this.selectGridSize(3);
-    // this.highestScore = Number(localStorage.getItem('highestScore'));
+    });
   }
 
   /**
@@ -53,14 +54,16 @@ export class BoardGameComponentComponent implements OnInit {
     this.globalSizeOfGrid = size;
     this.colArray = [];
     this.rowArray = [];
+    //creating grid
     for (let i = 0; i < size; i++) {
       this.colArray.push(i);
     }
     for (let i = 0; i < size; i++) {
       this.rowArray.push(i);
     }
+    //setting up blinking of green color
     this.setGreenBlink(size);
-    this.cd.markForCheck();
+    this.cd.markForCheck(); // for detecting changes
   }
 
   /**
@@ -73,21 +76,22 @@ export class BoardGameComponentComponent implements OnInit {
       position: 'top',
       showConfirmButton: false,
       icon: 'success',
-      timer: 5000,
+      timer: 3000,
       title: 'Game started, All the best!!!'
     })
     clearInterval(this.timer);
     this.intervalCount = 0;
     this.score = 0;
     this.timer = setInterval(() => {
-      const matches = document.getElementsByClassName("grid-column");
-      for (let i = 0; i < matches.length; i++) {
-        matches[i].classList.remove('selected-index');
+      const findClass = document.getElementsByClassName("grid-column");
+      for (let i = 0; i < findClass.length; i++) {
+        findClass[i].classList.remove('selected-index');
       }
+      //generate random number within size * size
       const gridIndex = Math.floor(Math.random() * (sizeOfGrid * sizeOfGrid));
+      //applying class to random generated index
       document.getElementsByClassName("grid-column")[gridIndex].classList.add("selected-index");
       if (this.intervalCount++ > 119) {
-        Swal.fire('Hello world!');
         this.resetGame();
       }
     }, 1000);
@@ -99,16 +103,18 @@ export class BoardGameComponentComponent implements OnInit {
   resetGame() {
     this.score = 0;
     this.intervalCount = 0;
+    //cleating intervalset before
     clearInterval(this.timer);
     Swal.fire({
       toast: true,
       position: 'top',
       showConfirmButton: false,
-      icon: 'success',
-      timer: 5000,
-      title: 'Game stopped / Time up!, Play again!'
+      icon: 'info',
+      timer: 3000,
+      title: 'Game stopped / Time up! Play again!'
     })
   }
+
   /**
    * Restarts game
    */
@@ -116,17 +122,20 @@ export class BoardGameComponentComponent implements OnInit {
     this.resetGame();
     this.selectGridSize(this.globalSizeOfGrid);
   }
+
   /**
    * Determines whether grid click on
    * @param event 
    */
   onGridClick(event: any) {
+    //checks wheather class exists or not
     if (event.target.classList.contains('selected-index')) {
       this.score++;
     }
     else {
       this.score--;
     }
+    //setting highest score to localStorage as well
     if (this.score > this.highestScore) {
       this.highestScore = this.score;
       localStorage.setItem("highestScore", this.highestScore.toString());
