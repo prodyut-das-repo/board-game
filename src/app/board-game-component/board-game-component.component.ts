@@ -91,7 +91,7 @@ export class BoardGameComponentComponent implements OnInit {
       const gridIndex = Math.floor(Math.random() * (sizeOfGrid * sizeOfGrid));
       //applying class to random generated index
       document.getElementsByClassName("grid-column")[gridIndex].classList.add("selected-index");
-      if (this.intervalCount++ > 119) {
+      if (this.intervalCount++ >= 119) {
         this.resetGameAfterTimeOver();
       }
     }, 1000);
