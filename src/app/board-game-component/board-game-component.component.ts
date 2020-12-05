@@ -110,7 +110,7 @@ export class BoardGameComponentComponent implements OnInit {
       confirmButtonText: `Okay`,
     }).then((result) => {
       if (result.value) {
-        //triggered after reading rules
+        //triggered after okay is clicked
         this.restartGame()
       }
     });
